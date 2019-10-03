@@ -3,6 +3,7 @@
   import EmployeeListItem from './EmployeeListItem'
   import EmployeeForm from './EmployeeForm'
 
+  let searchString = ''
   let addingNewEmployee = false
 </script>
 <h3>
@@ -13,8 +14,14 @@
     <small on:click={loadEmployees}>Reload</small>
   {/if}
 </h3>
+
+<input type="search" bind:value={searchString} placeholder="Search...">
+
 <ul>
-  {#each $sortedEmployees as e (e.id)}
+  {#each $sortedEmployees.filter(e => {
+    if (!searchString) return true
+    return (e.firstName + e.lastName).toLowerCase().indexOf(searchString.toLowerCase()) > -1
+  }) as e (e.id)}
     <EmployeeListItem employee={e} />
   {/each}
 </ul>
