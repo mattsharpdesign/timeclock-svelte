@@ -16,6 +16,9 @@
     "parcel-plugin-svelte": "^4.0.4",
     "svelte": "^3.12.1"
   },
+  "dependencies": {
+    "firebase": "^7.0.0"
+  },
   "browserslist": [
     ">5%"
   ]

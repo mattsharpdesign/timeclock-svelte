@@ -1,5 +1,5 @@
 <script>
-  import { user, logOut } from '../stores/auth-store'
+  import { user, signOut } from '../stores/auth-store'
 
   export let title = '';
 </script>
@@ -16,7 +16,7 @@
   <h1>
     {title}
     {#if $user}
-      <small on:click={logOut}>Log out {$user.email}</small>
+      <small on:click={signOut}>Sign out {$user.email}</small>
     {/if}
   </h1>
 </nav>
