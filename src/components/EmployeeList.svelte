@@ -14,7 +14,7 @@
   </a>
   <input type="search" bind:value={searchString} placeholder="Search...">
 </header>
-<ul>
+<ul class="employees" class:loading={$loading}>
   {#each $sortedEmployees.filter(e => {
     if (!searchString) return true
     return (e.firstName + e.lastName).toLowerCase().indexOf(searchString.toLowerCase()) > -1
