@@ -14,6 +14,10 @@
   })
 
   function handleSave() {
+    if (!firstName || !lastName) {
+      errorMessage = 'First and last name are required.'
+      return
+    }
     isSaving = true
     errorMessage = ''
     saveEmployee({
