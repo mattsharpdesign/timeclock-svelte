@@ -6,17 +6,14 @@
   let searchString = ''
   let addingNewEmployee = false
 </script>
-<h3>
-  Employees
-  {#if $loading}
-    <small>Loading</small>
-  {:else}
-    <small on:click={loadEmployees}>Reload</small>
-  {/if}
-</h3>
 
-<input type="search" bind:value={searchString} placeholder="Search...">
-
+<header>
+  <h1>Employees</h1>
+  <a href on:click|preventDefault={loadEmployees}>
+    {$loading ? 'Loading...' : 'Reload'}
+  </a>
+  <input type="search" bind:value={searchString} placeholder="Search...">
+</header>
 <ul>
   {#each $sortedEmployees.filter(e => {
     if (!searchString) return true

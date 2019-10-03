@@ -14,8 +14,8 @@
   {#if editing}
     <EmployeeForm {employee} onCancel={stopEditing} />
   {:else}
-    <h4 on:click={startEditing}>
+    <a href on:click|preventDefault={startEditing}>
       {employee.firstName} {employee.lastName}
-    </h4>
+    </a>
   {/if}
 </li>

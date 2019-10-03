@@ -8,7 +8,9 @@
   }
 </script>
 
-<h3>Sign In</h3>
+<header>
+  <h1>Sign In</h1>
+</header>
 <form>
   <input type="email" bind:value={email} placeholder="Email address">
   <input type="password" bind:value={password} placeholder="Password">
@@ -16,6 +18,6 @@
     {$status === 'signing in' ? 'Signing in' : 'Sign in'}
   </button>
   {#if $errorMessage}
-    <p>{$errorMessage}</p>
+    <p class="error">{$errorMessage}</p>
   {/if}
 </form>

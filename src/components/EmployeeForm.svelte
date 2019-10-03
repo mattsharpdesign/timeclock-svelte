@@ -53,12 +53,6 @@
   }
 </script>
 
-<style>
-  p.error {
-    color: crimson;
-  }
-</style>
-
 <form>
   <input type="text" bind:value={firstName} placeholder="First name">
   <input type="text" bind:value={lastName} placeholder="Last name">

@@ -1,0 +1,13 @@
+<script>
+  import { user, signOut } from '../stores/auth-store'
+
+  export let title = '';
+</script>
+
+<header>
+  <h1>{title}</h1>
+  {#if $user}
+    <a class="signout" href on:click|preventDefault={signOut}>Sign out {$user.email}</a>
+  {/if}
+  <hr />
+</header>

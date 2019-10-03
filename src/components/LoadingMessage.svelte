@@ -2,14 +2,6 @@
   export let message = ''
 </script>
 
-<style>
-  div {
-    border: 1px solid green;
-    border-radius: 10px;
-    padding: 30px;
-  }
-</style>
-
-<div>
+<div class="large message">
   <p>{message}</p>
 </div>
