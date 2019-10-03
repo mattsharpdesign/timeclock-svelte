@@ -1,5 +1,5 @@
 <script>
-  import { loading, loadEmployees, sortedEmployees, addFakeEmployee } from '../stores/employee-store'
+  import { loading, loadEmployees, sortedEmployees } from '../stores/employee-store'
   import EmployeeListItem from './EmployeeListItem'
   import EmployeeForm from './EmployeeForm'
 

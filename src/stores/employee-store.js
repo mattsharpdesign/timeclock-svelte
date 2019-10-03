@@ -55,10 +55,28 @@ export const loadEmployees = function() {
 }
 
 export const saveEmployee = function(data) {
+  if (data.id) {
+    const docRef = collectionRef.doc(data.id)
+    return docRef.update({
+      firstName: data.firstName,
+      lastName: data.lastName
+    })
+  } else {
+    return collectionRef.add({
+      firstName: data.firstName,
+      lastName: data.lastName
+    })
+  }
+}
+
+export const fakeSaveEmployee = function(data) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (Math.random() > 0.5) {
-        reject('An unexpected error occurred :(')
+        reject({
+          code: 'fake-error',
+          message: 'An unexpected error occurred :('
+        })
       } else {
         let employee
         if (data.id) {

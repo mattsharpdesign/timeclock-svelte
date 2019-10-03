@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte'
-  import { saveEmployee, deleteEmployee } from '../stores/employee-store'
+  import { loadEmployees, saveEmployee, deleteEmployee } from '../stores/employee-store'
 
   export let employee, onCancel
 
@@ -22,11 +22,12 @@
       lastName
     }).then(() => {
       isSaving = false
+      loadEmployees()
       onCancel()
     }).catch(error => {
       isSaving = false
-      console.log('Error saving employee:', error)
-      errorMessage = error
+      console.log('Error saving employee:', error.code, error.message)
+      errorMessage = error.message
     })
   }
 
