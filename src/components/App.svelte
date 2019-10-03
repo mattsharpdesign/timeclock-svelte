@@ -1,6 +1,7 @@
 <script>
   import { status, user } from '../stores/auth-store'
   import MainNav from './MainNav'
+  import EmployeeList from './EmployeeList'
   import LogInForm from './LogInForm'
 
   export let appTitle = '';
@@ -16,9 +17,7 @@
 
 <MainNav title={appTitle} />
 {#if $status === 'logged in'}
-  <p>
-    Welcome, {$user.email}!
-  </p>
+  <EmployeeList />
 {:else}
   <LogInForm />
 {/if}
