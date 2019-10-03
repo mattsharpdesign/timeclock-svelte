@@ -19,7 +19,22 @@ input, button {
 }
 
 main ul {
-  line-height: 300%;
+  line-height: 200%;
+  list-style-type: none;
+  padding-left: 0px;
+}
+
+main ul li {
+  padding: 15px 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+ul.employees li a:before {
+  content: "😃\2001";
+}
+
+ul.employees.loading li a:before {
+  content: "😔\2001";
 }
 
 li a {
