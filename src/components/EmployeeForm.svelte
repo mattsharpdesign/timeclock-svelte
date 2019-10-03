@@ -34,10 +34,17 @@
   function handleDelete() {
     if (window.confirm(`Are you sure you want to delete ${employee.firstName} ${employee.lastName}?`)) {
       isDeleting = true
-      deleteEmployee(employee).then(() => {
-        isDeleting = false;
-        onCancel()
-      })
+      deleteEmployee(employee)
+        .then(() => {
+          isDeleting = false;
+          loadEmployees()
+          onCancel()
+        })
+        .catch(error => {
+          isDeleting = false;
+          console.log('Error deleting employee:', error.code, error.message)
+          errorMessage = error.message
+        })
     }
   }
 </script>

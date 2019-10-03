@@ -102,6 +102,11 @@ export const fakeSaveEmployee = function(data) {
 }
 
 export const deleteEmployee = function(data) {
+  const docRef = collectionRef.doc(data.id)
+  return docRef.delete()
+}
+
+export const fakeDeleteEmployee = function(data) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       let snapshot = get(employees)
