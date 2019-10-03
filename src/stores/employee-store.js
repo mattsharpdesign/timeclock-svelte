@@ -64,7 +64,12 @@ export const saveEmployee = function(data) {
   } else {
     return collectionRef.add({
       firstName: data.firstName,
-      lastName: data.lastName
+      lastName: data.lastName,
+      // add default values because I don't know if
+      // these are needed by other other connected apps
+      // TODO: check this, delete these if possible
+      payrollId: '',
+      status: 0
     })
   }
 }
