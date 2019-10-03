@@ -1,0 +1,22 @@
+{
+  "name": "timeclock-svelte",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.3",
+    "parcel-plugin-svelte": "^4.0.4",
+    "svelte": "^3.12.1"
+  },
+  "browserslist": [
+    ">5%"
+  ]
+}
