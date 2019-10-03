@@ -1,11 +1,27 @@
 <script>
-  export let name;
+  import { status, user } from '../stores/auth-store'
+  import MainNav from './MainNav'
+  import LogInForm from './LogInForm'
+
+  export let appTitle = '';
 </script>
 
 <style>
-  h1 {
-    color: darkolivegreen;
+  footer {
+    color: dimgray;
+    position: absolute;
+    bottom: 0;
   }
 </style>
 
-<h1>Hello, {name}!</h1>
+<MainNav title={appTitle} />
+{#if $status === 'logged in'}
+  <p>
+    Welcome, {$user.email}!
+  </p>
+{:else}
+  <LogInForm />
+{/if}
+<footer>
+  Auth status: {$status}
+</footer>
