@@ -1,11 +1,18 @@
 <script>
-  import { sortedEmployees, addFakeEmployee } from '../stores/employee-store'
+  import { loading, loadEmployees, sortedEmployees, addFakeEmployee } from '../stores/employee-store'
   import EmployeeListItem from './EmployeeListItem'
   import EmployeeForm from './EmployeeForm'
 
   let addingNewEmployee = false
 </script>
-<h3>Employees</h3>
+<h3>
+  Employees
+  {#if $loading}
+    <small>Loading</small>
+  {:else}
+    <small on:click={loadEmployees}>Reload</small>
+  {/if}
+</h3>
 <ul>
   {#each $sortedEmployees as e (e.id)}
     <EmployeeListItem employee={e} />

@@ -1,10 +1,20 @@
 import { writable, derived, get } from 'svelte/store'
+import { db } from '../firebase-services'
+import { user } from './auth-store'
+
+let collectionRef
+
+export const loading = writable(false)
 
 export const employees = writable([], () => {
   console.log('employees got their first listener')
-  if (window.localStorage.getItem('employees')) {
-    employees.set(JSON.parse(window.localStorage.getItem('employees')))
-  }
+  // This is just for local development:
+  // if (window.localStorage.getItem('employees')) {
+  //   employees.set(JSON.parse(window.localStorage.getItem('employees')))
+  // }
+  const { accountId } = get(user)
+  collectionRef = db.collection('accounts').doc(accountId).collection('employees')
+  loadEmployees()
   return () => {
     console.log('employees lost their last listener :(')
   }
@@ -22,6 +32,27 @@ export const sortedEmployees = derived(
     return 0
   })
 )
+
+export const loadEmployees = function() {
+  loading.set(true)
+  collectionRef.get()
+    .then(querySnapshot => {
+      let tempArray = []
+      querySnapshot.forEach(doc => {
+        tempArray.push({
+          id: doc.id,
+          firstName: doc.data().firstName,
+          lastName: doc.data().lastName
+        })
+      })
+      employees.set(tempArray)
+      loading.set(false)
+    })
+    .catch(error => {
+      console.log(error)
+      loading.set(false)
+    })
+}
 
 export const saveEmployee = function(data) {
   return new Promise((resolve, reject) => {
