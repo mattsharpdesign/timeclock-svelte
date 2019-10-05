@@ -2,15 +2,15 @@
   "name": "timeclock-svelte",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel src/index.html",
     "build": "parcel build src/index.html"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Matt Sharp",
+  "license": "UNLICENSED",
+  "private": true,
   "devDependencies": {
     "parcel-bundler": "^1.12.3",
     "parcel-plugin-svelte": "^4.0.4",
