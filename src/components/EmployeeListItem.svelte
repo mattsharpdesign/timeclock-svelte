@@ -1,16 +1,20 @@
 <script>
+  import { fade } from 'svelte/transition'
   import EmployeeForm from './EmployeeForm'
   export let employee
+
   let editing = false, hasChanged = false
+  
   function startEditing() {
     editing = true
   }
+
   function onCancel(wasChanged = false) {
     editing = false
   }
+
   function onSave(updatedEmployee) {
     editing = false
-    // alert(`${updatedEmployee.firstName} ${updatedEmployee.lastName} saved.`)
     hasChanged = true
     setTimeout(() => {
       hasChanged = false
@@ -18,7 +22,7 @@
   }
 </script>
 
-<li id={employee.id} class:hasChanged={hasChanged}>
+<li id={employee.id} class:hasChanged={hasChanged} out:fade>
   {#if editing}
     <EmployeeForm {employee} {onCancel} {onSave} />
   {:else}
