@@ -14,19 +14,21 @@
   })
 
   function handleSave() {
-    if (!firstName || !lastName) {
-      errorMessage = 'First and last name are required.'
-      return
-    }
+    // Validation is done in the store now
+    // if (!firstName || !lastName) {
+    //   errorMessage = 'First and last name are required.'
+    //   return
+    // }
     isSaving = true
     errorMessage = ''
     saveEmployee({
       id: employee.id,
       firstName,
       lastName
-    }).then((returnedValue) => {
+    }).then((savedEmployee) => {
+      // console.log(savedEmployee)
       isSaving = false
-      onSave(returnedValue)
+      onSave(savedEmployee)
     }).catch(error => {
       isSaving = false
       console.log('Error saving employee:', error.code, error.message)
@@ -38,7 +40,8 @@
     if (window.confirm(`Are you sure you want to delete ${employee.firstName} ${employee.lastName}?`)) {
       isDeleting = true
       deleteEmployee(employee)
-        .then(() => {
+        .then(result => {
+          // console.log(result)
           isDeleting = false;
           onCancel()
         })

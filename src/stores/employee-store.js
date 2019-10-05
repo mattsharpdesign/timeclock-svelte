@@ -55,41 +55,51 @@ export const loadEmployees = function() {
 }
 
 export const saveEmployee = function(data) {
-  if (data.id) {
-    const docRef = collectionRef.doc(data.id)
-    return docRef.update({
-      firstName: data.firstName,
-      lastName: data.lastName
-    })
-      .then(() => {
-        // update store
+  return new Promise((resolve, reject) => {
+    // Validate
+    if (!data.firstName || !data.lastName) {
+      reject({
+        code: 'invalid',
+        message: 'First and last name are required.'
+      })
+    }
+    if (data.id) { 
+      // Update existing employee
+      const docRef = collectionRef.doc(data.id)
+      docRef.update({
+        firstName: data.firstName,
+        lastName: data.lastName
+      }).then(() => {
+        // Update store
         employees.update(current => {
           let employee = current.find(e => e.id === data.id)
           employee.firstName = data.firstName
           employee.lastName = data.lastName
           return current
         })
-        return get(employees).find(e => e.id === data.id)
+        // The calling function will be expecting an employee object 
+        resolve(get(employees).find(e => e.id === data.id))
       })
-  } else {
-    let newEmployee = {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      // add default values because I don't know if
-      // these are needed by other other connected apps
-      // TODO: check this, delete these if possible
-      payrollId: '',
-      status: 0
-    }
-    return collectionRef.add(newEmployee)
-      .then(docRef => {
+    } else {
+      let newEmployee = {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        // add default values because I don't know if
+        // these are needed by other other connected apps
+        // TODO: check this, delete these if possible
+        payrollId: '',
+        status: 0
+      }
+      collectionRef.add(newEmployee).then(docRef => {
         newEmployee.id = docRef.id
         employees.update(current => [ ...current, newEmployee ])
-        return newEmployee
+        resolve(newEmployee)
       })
-  }
+    }
+  })
 }
 
+// For local testing
 export const fakeSaveEmployee = function(data) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -123,17 +133,21 @@ export const fakeSaveEmployee = function(data) {
 }
 
 export const deleteEmployee = function(data) {
-  const docRef = collectionRef.doc(data.id)
-  return docRef.delete().then(() => {
-    // update store
-    employees.update(current => {
-      const index = current.findIndex(e => e.id === data.id)
-      current.splice(index, 1)
-      return current
-    })
+  return new Promise((resolve, reject) => {
+    const docRef = collectionRef.doc(data.id)
+    docRef.delete().then(() => {
+      // Update store
+      employees.update(current => {
+        const index = current.findIndex(e => e.id === data.id)
+        current.splice(index, 1)
+        return current
+      })
+      resolve({ deleted: data })
+    }).catch(error => reject(error))
   })
 }
 
+// For local testing
 export const fakeDeleteEmployee = function(data) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
