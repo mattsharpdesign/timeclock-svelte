@@ -9,4 +9,5 @@
     | Account ID: {$user.accountId}
   {/if}
   | App version: {packageJson.name} v{packageJson.version}
+  | Environment: {process.env.NODE_ENV}
 </footer>
