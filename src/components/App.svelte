@@ -6,7 +6,6 @@
   import LogInForm from './LogInForm'
   import LoadingMessage from './LoadingMessage'
   import NotAuthorized from './NotAuthorized'
-
   import 'normalize.css'
 
   export let appTitle = '';

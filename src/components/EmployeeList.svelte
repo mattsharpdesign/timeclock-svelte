@@ -9,6 +9,7 @@
   function onCancel() {
     addingNewEmployee = false
   }
+  
   function onSave(newEmployee) {
     addingNewEmployee = false
     window.alert(`${newEmployee.firstName} ${newEmployee.lastName} added.`)
