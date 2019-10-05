@@ -42,7 +42,11 @@ export const loadEmployees = function() {
         tempArray.push({
           id: doc.id,
           firstName: doc.data().firstName,
-          lastName: doc.data().lastName
+          lastName: doc.data().lastName,
+          // I don't know if we need these next two,
+          // but we'll keep them for now
+          payrollId: doc.data().payrollId,
+          status: doc.data().status
         })
       })
       employees.set(tempArray)
