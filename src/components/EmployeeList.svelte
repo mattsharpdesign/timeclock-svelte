@@ -9,10 +9,10 @@
 
 <header>
   <h1>Employees</h1>
+  <input type="search" bind:value={searchString} placeholder="Search...">
   <a href on:click|preventDefault={loadEmployees}>
     {$loading ? 'Loading...' : 'Reload'}
   </a>
-  <input type="search" bind:value={searchString} placeholder="Search...">
 </header>
 <ul class="employees" class:loading={$loading}>
   {#each $sortedEmployees.filter(e => {
