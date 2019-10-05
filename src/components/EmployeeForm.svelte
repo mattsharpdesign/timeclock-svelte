@@ -52,10 +52,10 @@
   }
 </script>
 
-<form>
+<form on:submit|preventDefault={handleSave}>
   <input type="text" bind:value={firstName} placeholder="First name">
   <input type="text" bind:value={lastName} placeholder="Last name">
-  <button type="button" class="save" on:click={handleSave}>{isSaving ? 'Saving...' : 'Save'}</button>
+  <button class="save">{isSaving ? 'Saving...' : 'Save'}</button>
   {#if employee.id}
     <button type="button" class="delete" on:click={handleDelete}>{isDeleting ? 'Deleting...' : 'Delete'}</button>
   {/if}
