@@ -25,7 +25,6 @@
       firstName,
       lastName
     }).then((returnedValue) => {
-      console.log(returnedValue)
       isSaving = false
       onSave(returnedValue)
     }).catch(error => {
