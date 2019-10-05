@@ -25,6 +25,7 @@
       firstName,
       lastName
     }).then((returnedValue) => {
+      console.log(returnedValue)
       isSaving = false
       onSave(returnedValue)
     }).catch(error => {
@@ -40,7 +41,6 @@
       deleteEmployee(employee)
         .then(() => {
           isDeleting = false;
-          // loadEmployees()
           onCancel()
         })
         .catch(error => {

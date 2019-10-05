@@ -12,15 +12,6 @@
   function onSave(newEmployee) {
     addingNewEmployee = false
     window.alert(`${newEmployee.firstName} ${newEmployee.lastName} added.`)
-    // This adds style to the newly added item, but I'm not using it now
-    // const element = document.getElementById(returnedValue.id)
-    // if (element) {
-    //   element.className = element.className + ' isNew'
-    //   setTimeout(() => {
-    //     className = element.className
-    //     element.className = className.substr(0, className.indexOf(' isNew'))
-    //   }, 2000)
-    // }
   }
 </script>
 
