@@ -11,10 +11,10 @@
 <header>
   <h1>Sign In</h1>
 </header>
-<form>
+<form on:submit|preventDefault={handleSignIn}>
   <input type="email" bind:value={email} placeholder="Email address">
   <input type="password" bind:value={password} placeholder="Password">
-  <button type="button" on:click={handleSignIn} disabled={$status === 'signing in'}>
+  <button disabled={$status === 'signing in'}>
     {$status === 'signing in' ? 'Signing in' : 'Sign in'}
   </button>
   {#if $errorMessage}
