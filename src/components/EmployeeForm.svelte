@@ -2,7 +2,7 @@
   import { onMount } from 'svelte'
   import { loadEmployees, saveEmployee, deleteEmployee } from '../stores/employee-store'
 
-  export let employee, onCancel
+  export let employee, onCancel, onSave
 
   let firstName, lastName
   let isSaving = false, isDeleting = false
@@ -24,10 +24,9 @@
       id: employee.id,
       firstName,
       lastName
-    }).then(() => {
+    }).then((returnedValue) => {
       isSaving = false
-      loadEmployees()
-      onCancel()
+      onSave(returnedValue)
     }).catch(error => {
       isSaving = false
       console.log('Error saving employee:', error.code, error.message)
@@ -41,7 +40,7 @@
       deleteEmployee(employee)
         .then(() => {
           isDeleting = false;
-          loadEmployees()
+          // loadEmployees()
           onCancel()
         })
         .catch(error => {
@@ -56,9 +55,9 @@
 <form>
   <input type="text" bind:value={firstName} placeholder="First name">
   <input type="text" bind:value={lastName} placeholder="Last name">
-  <button type="button" on:click={handleSave}>{isSaving ? 'Saving...' : 'Save'}</button>
+  <button type="button" class="save" on:click={handleSave}>{isSaving ? 'Saving...' : 'Save'}</button>
   {#if employee.id}
-    <button type="button" on:click={handleDelete}>{isDeleting ? 'Deleting...' : 'Delete'}</button>
+    <button type="button" class="delete" on:click={handleDelete}>{isDeleting ? 'Deleting...' : 'Delete'}</button>
   {/if}
   <button type="button" on:click={onCancel}>Cancel</button>
   {#if errorMessage}

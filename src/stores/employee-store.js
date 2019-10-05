@@ -61,8 +61,18 @@ export const saveEmployee = function(data) {
       firstName: data.firstName,
       lastName: data.lastName
     })
+      .then(() => {
+        // update store
+        employees.update(current => {
+          let employee = current.find(e => e.id === data.id)
+          employee.firstName = data.firstName
+          employee.lastName = data.lastName
+          return current
+        })
+        return get(employees).find(e => e.id === data.id)
+      })
   } else {
-    return collectionRef.add({
+    let newEmployee = {
       firstName: data.firstName,
       lastName: data.lastName,
       // add default values because I don't know if
@@ -70,7 +80,13 @@ export const saveEmployee = function(data) {
       // TODO: check this, delete these if possible
       payrollId: '',
       status: 0
-    })
+    }
+    return collectionRef.add(newEmployee)
+      .then(docRef => {
+        newEmployee.id = docRef.id
+        employees.update(current => [ ...current, newEmployee ])
+        return newEmployee
+      })
   }
 }
 
@@ -108,7 +124,14 @@ export const fakeSaveEmployee = function(data) {
 
 export const deleteEmployee = function(data) {
   const docRef = collectionRef.doc(data.id)
-  return docRef.delete()
+  return docRef.delete().then(() => {
+    // update store
+    employees.update(current => {
+      const index = current.findIndex(e => e.id === data.id)
+      current.splice(index, 1)
+      return current
+    })
+  })
 }
 
 export const fakeDeleteEmployee = function(data) {
