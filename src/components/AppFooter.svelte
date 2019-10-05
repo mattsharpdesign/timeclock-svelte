@@ -1,4 +1,5 @@
 <script>
+  import packageJson from '../../package.json'
   import { status, user } from '../stores/auth-store'
 </script>
 
@@ -7,4 +8,5 @@
   {#if $user} 
     | Account ID: {$user.accountId}
   {/if}
+  | App version: {packageJson.name} v{packageJson.version}
 </footer>
