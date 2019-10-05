@@ -34,7 +34,7 @@ export const fakeLogIn = function() {
   }, 600)
 }
 
-export const logOut = function() {
+export const fakeLogOut = function() {
   user.set(null);
   status.set('logged out')
 }
