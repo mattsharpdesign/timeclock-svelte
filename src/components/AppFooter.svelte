@@ -3,6 +3,13 @@
   import { status, user } from '../stores/auth-store'
 </script>
 
+<style>
+  .menu {
+    background-color: #eee !important;
+    border-top: 1px solid #ccc !important;
+  }
+</style>
+
 <div class="ui bottom fixed text menu">
   <div class="item">
     Auth status: {$status}
