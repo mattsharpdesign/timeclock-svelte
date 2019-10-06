@@ -66,6 +66,7 @@ export const saveEmployee = function(data) {
         code: 'invalid',
         message: 'First and last name are required.'
       })
+      return
     }
     if (data.id) { 
       // Update existing employee
