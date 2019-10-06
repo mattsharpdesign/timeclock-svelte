@@ -26,7 +26,9 @@
       firstName,
       lastName
     }).then((savedEmployee) => {
-      console.log(savedEmployee)
+      if (process.env.NODE_ENV === 'development') {
+        console.log(savedEmployee)
+      }
       isSaving = false
       onSave(savedEmployee)
     }).catch(error => {
@@ -41,7 +43,9 @@
       isDeleting = true
       deleteEmployee(employee)
         .then(result => {
-          console.log(result)
+          if (process.env.NODE_ENV === 'development') {
+            console.log(result)
+          }
           isDeleting = false;
           onCancel()
         })
