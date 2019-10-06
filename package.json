@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "firebase": "^7.0.0",
-    "normalize.css": "^8.0.1"
+    "semantic-ui-css": "^2.4.1"
   },
   "browserslist": [
     ">5%"

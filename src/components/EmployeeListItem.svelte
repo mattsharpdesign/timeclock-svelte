@@ -22,7 +22,19 @@
   }
 </script>
 
-<li id={employee.id} class:hasChanged={hasChanged} out:fade>
+<style>
+  a {
+    font-size: larger;
+  }
+  .changed a {
+    color: green !important;
+  }
+</style>
+
+<div 
+  class="item" id={employee.id} 
+  class:changed={hasChanged} 
+  transition:fade>
   {#if editing}
     <EmployeeForm {employee} {onCancel} {onSave} />
   {:else}
@@ -30,4 +42,4 @@
       {employee.firstName} {employee.lastName}
     </a>
   {/if}
-</li>
+</div>

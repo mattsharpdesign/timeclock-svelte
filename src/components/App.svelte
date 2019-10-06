@@ -6,13 +6,19 @@
   import LogInForm from './LogInForm'
   import LoadingMessage from './LoadingMessage'
   import NotAuthorized from './NotAuthorized'
-  import 'normalize.css'
+  import 'semantic-ui-css/semantic.css'
 
   export let appTitle = '';
 </script>
 
+<style>
+  .container {
+    padding-bottom: 100px;
+  }
+</style>
+
 <AppHeader title={appTitle} />
-<main>
+<div class="ui container">
   {#if $user}
     {#if $user.role === 'admin'}
       <EmployeeList />
@@ -26,5 +32,5 @@
   {:else}
     <LogInForm />
   {/if}
-</main>
+</div>
 <AppFooter />

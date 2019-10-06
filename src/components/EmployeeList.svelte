@@ -16,35 +16,42 @@
   }
 </script>
 
-<style>
-  button {
-    margin-left: 20px;
-    font-size: large;
-    padding: 10px 20px;
-  }
-</style>
+<div class="ui secondary menu">
+  <div class="header item">Employees</div>
+  <div class="item">
+    <div class="ui icon input">
+      <input type="search" bind:value={searchString} placeholder="Search...">
+      <i 
+        class="link icon" 
+        class:search={!searchString}
+        class:cut={searchString}
+        on:click={() => searchString = ''}>
+      </i>
+    </div>
+  </div>
+  <div class="item">
+    <button 
+      class="ui basic button" 
+      class:loading={$loading}
+      on:click={loadEmployees}>
+      Refresh
+    </button>
+  </div>
+</div>
 
-<header>
-  <h1>Employees</h1>
-  <input type="search" bind:value={searchString} placeholder="Search...">
-  <a href on:click|preventDefault={loadEmployees}>
-    {$loading ? 'Loading...' : 'Reload'}
-  </a>
-</header>
-
-<ul class="employees" class:loading={$loading}>
+<div class="ui fluid vertical menu" class:loading={$loading}>
   {#each $sortedEmployees.filter(e => {
     if (!searchString) return true
     return (e.firstName + e.lastName).toLowerCase().indexOf(searchString.toLowerCase()) > -1
   }) as e (e.id)}
     <EmployeeListItem employee={e} />
   {/each}
-</ul>
+</div>
 
 {#if addingNewEmployee}
   <EmployeeForm employee={{}} {onCancel} {onSave} />
 {:else}
-  <button class="add" on:click={() => addingNewEmployee = true}>
+  <button class="ui positive button" on:click={() => addingNewEmployee = true}>
     Add Employee
   </button>
 {/if}

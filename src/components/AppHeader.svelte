@@ -2,10 +2,11 @@
   import { user, signOut } from '../stores/auth-store'
 </script>
 
-<header>
-  <h1>TimeClock Employee Management</h1>
+<div class="ui stackable menu">
+  <div class="header item">TimeClock Employee Management</div>
   {#if $user}
-    <a class="signout" href on:click|preventDefault={signOut}>Sign out {$user.email}</a>
+    <div class="right menu">
+      <a class="item" href on:click|preventDefault={signOut}>Sign out {$user.email}</a>
+    </div>
   {/if}
-  <hr />
-</header>
+</div>

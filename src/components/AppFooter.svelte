@@ -3,11 +3,13 @@
   import { status, user } from '../stores/auth-store'
 </script>
 
-<footer>
-  Auth status: {$status}
-  {#if $user} 
-    | Account ID: {$user.accountId}
-  {/if}
-  | App version: {packageJson.name} v{packageJson.version}
-  | Environment: {process.env.NODE_ENV}
-</footer>
+<div class="ui bottom fixed text menu">
+  <div class="item">
+    Auth status: {$status}
+    {#if $user} 
+      | Account ID: {$user.accountId}
+    {/if}
+    | App version: {packageJson.name} v{packageJson.version}
+    | Environment: {process.env.NODE_ENV}
+  </div>
+</div>

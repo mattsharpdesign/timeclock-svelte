@@ -54,15 +54,34 @@
   }
 </script>
 
-<form on:submit|preventDefault={handleSave}>
-  <input type="text" bind:value={firstName} placeholder="First name">
-  <input type="text" bind:value={lastName} placeholder="Last name">
-  <button class="save">{isSaving ? 'Saving...' : 'Save'}</button>
-  {#if employee.id}
-    <button type="button" class="delete" on:click={handleDelete}>{isDeleting ? 'Deleting...' : 'Delete'}</button>
-  {/if}
-  <button type="button" on:click={onCancel}>Cancel</button>
+<form 
+  class="ui form" 
+  class:error={errorMessage}
+  on:submit|preventDefault={handleSave}>
+  <div class="two fields">
+    <div class="field">
+      <input type="text" bind:value={firstName} placeholder="First name">
+    </div>
+    <div class="field">
+      <input type="text" bind:value={lastName} placeholder="Last name">
+    </div>
+  </div>
   {#if errorMessage}
-    <p class="error">{errorMessage}</p>
+    <div class="ui error message">{errorMessage}</div>
   {/if}
+  <button 
+    class="ui positive button"
+    class:loading={isSaving}>
+    Save
+  </button>
+  {#if employee.id}
+    <button 
+      type="button" 
+      class="ui negative button" 
+      class:loading={isDeleting}
+      on:click={handleDelete}>
+      Delete
+    </button>
+  {/if}
+  <button type="button" class="ui basic button" on:click={onCancel}>Cancel</button>
 </form>
