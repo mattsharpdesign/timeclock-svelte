@@ -7,7 +7,9 @@ let collectionRef
 export const loading = writable(false)
 
 export const employees = writable([], () => {
-  console.log('employees got their first listener')
+  if (process.env.NODE_ENV === 'development') {
+    console.log('employees got their first listener')
+  }
   // This is just for local development:
   // if (window.localStorage.getItem('employees')) {
   //   employees.set(JSON.parse(window.localStorage.getItem('employees')))
@@ -16,7 +18,9 @@ export const employees = writable([], () => {
   collectionRef = db.collection('accounts').doc(accountId).collection('employees')
   loadEmployees()
   return () => {
-    console.log('employees lost their last listener :(')
+    if (process.env.NODE_ENV === 'development') {
+      console.log('employees lost their last listener :(')
+    }
   }
 })
 
