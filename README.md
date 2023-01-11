@@ -1,5 +1,11 @@
 # timeclock-svelte
 
+An experiment using the (at the time) fairly new [Svelte](https://svelte.dev/) framework. 
+
+I was considering rewriting the `timeclock-react` app in Svelte but only
+got as far as an employee list management screen. Still, it was deployed to production,
+the code is pretty clean, and it works :)
+
 ## Setup
 
 Put your Firebase config values in `.env` (or `.env.development` etc)
